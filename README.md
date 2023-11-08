@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hook
+=> React hooks must be called in the exact same order in component render function, it should not be called conditionally, We can not put hook inside of if statement,function,loops. They must be at the top level of function
 
-## Available Scripts
+useState Hook
+=>useState always returns an array with two values.First is the current state (variable that contains the component data) and second is the function which is used to update the current state.
 
-In the project directory, you can run:
+When computing a Fibonacci series using useState, each update triggers a re-render of the component, potentially leading to unnecessary re-computation of the entire sequence. This can result in a significant performance overhead, especially for larger values of n, leading to slower execution and possible freezing of the UI.
 
-### `npm start`
+To efficiently compute a Fibonacci series, it is recommended to use more appropriate approaches, such as iterative or recursive algorithms that are optimized for handling mathematical computations. These algorithms can efficiently compute Fibonacci numbers without the overhead of triggering multiple component re-renders, resulting in better performance and faster execution.
+or You can take a function as an argument in useState and put your code there
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+useEffect Hook
+=>Everything inside the useState hook is get executed everytime our application renders. It is used when component mounts or some resources on your page change.
+useEffect take a function as an argument which runs everytime when the application renders and second parameter is a dependency array and whatever you pass in the array is the value that whenver it gets changed the hook is executed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+When we pass empty array then hook is executed only once because empty array is never going to change
 
-### `npm test`
+useMemo
+=> Think of a function that performs a complex calculations, it gets executed every time the component re rendered. Here we have a slow function that we don't want to get executed again and again.
+Memo is used for memoized value which means caching the value so that we don't have to compute the value again and again.
+For example we have a input and it gives same output every time if we have same input so we can cache the input value no and the output it gives us.
+If the no doesn't change we don't need to recalculate the slow function over and over again.
+we use useMemo and we pass it a function and the function is what we want to memoized.and the second argument is the list of dependency.
+We are only running the slow code when we have to.
+Memory overhead
+Note: Everytime the component is render a new object is created which has different reference then the previous one
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+useRef Hook
+=> What if we want to display no of times the component renders. We can't do it with state and useEffect, We will go into infine loop. Solution is useRef
+useRef doesn't cause you to re render
+It can be used to store a mutable value that does not cause a re-render when updated.
+Does Not Cause Re-renders
+If we tried to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.
 
-### `npm run build`
+To avoid this, we can use the useRef Hook.
+useRef() only returns one item. It returns an Object called current.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When we initialize useRef we set the initial value: useRef(0).
+It's like doing this: const count = {current: 0}. We can access the count by using count.current.
+=> Reference element inside your html element, each element has ref attribute and you can set that to any ref you want. It is used to reference input element
+Use useRef to focus the input:
+Tracking State Changes
+The useRef Hook can also be used to keep track of previous state values.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is because we are able to persist useRef values between renders.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+UseContext hook
+=>It can be broken into two different sections. We have a Context provider that wraps all the code that need access to the information of context and the single prop value which has value of the context. All the component isside the provider has access to the value prop.
+Context is for passing the prop all the way down to any of the children without passing it manually to each children. It is like a global state for all of the children.
