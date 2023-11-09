@@ -4,6 +4,10 @@ import UseEffect from "./UseEffect";
 import UseMemo from "./UseMemo";
 import UseRef from "./UseRef";
 import UseContext from "./UseContext";
+import UseContextExample from "./UseContextExample";
+import UseRefExample from "./UseRefExample";
+import UseMemoExample from "./UseMemoExample";
+import UseMemoEg from "./UseMemoEg";
 
 function App() {
 	return (
@@ -13,6 +17,10 @@ function App() {
 			<UseMemo />
 			<UseRef />
 			<UseContext />
+			<UseContextExample />
+			<UseRefExample />
+			<UseMemoExample />
+			<UseMemoEg />
 		</div>
 	);
 }
